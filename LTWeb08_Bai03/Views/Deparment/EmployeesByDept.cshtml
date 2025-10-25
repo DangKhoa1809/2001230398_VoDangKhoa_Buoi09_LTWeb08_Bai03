@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Nhân viên theo phòng ban";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center fw-bold">EMPLOYEES LIST</h2>
+
+        <p>@Html.ActionLink("Create New", "ThemMoi", "Employee", null, new { @class = "text-decoration-none" })</p>
+
+        <table class="table table-bordered">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>Mã NV</th>
+                    <th>Họ và Tên</th>
+                    <th>Giới Tính</th>
+                    <th>Thành Phố</th>
+                    <th>Ảnh</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var e in Model)
+                {
+                    <tr>
+                        <td>@e.Id</td>
+                        <td>@e.Name</td>
+                        <td>@e.Gender</td>
+                        <td>@e.City</td>
+                        <td><img src="~/Images/@e.Image" width="80" height="100" /></td>
+                        <td>
+                            @Html.ActionLink("Edit", "Sua", "Employee", new { id = e.Id }, new { @class = "text-decoration-none" }) |
+                            @Html.ActionLink("Details", "ChiTiet", "Employee", new { id = e.Id }, new { @class = "text-decoration-none" }) |
+                            @Html.ActionLink("Delete", "Xoa", "Employee", new { id = e.Id }, new { @class = "text-decoration-none" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <p>@Html.ActionLink("Go Back Department List", "SideBarDept", "Deparment", null, new { @class = "text-decoration-none" })</p>
+    </div>
+</body>
+</html>
+

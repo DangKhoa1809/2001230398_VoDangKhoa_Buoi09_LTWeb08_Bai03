@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LTWeb08_Bai03.Models.Employee>
+
+@{
+    ViewBag.Title = "Danh sách nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h2 class="text-center fw-bold mt-3"> BẢNG EMPLOYEE</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "ThemMoi", "Employee", null, new { @class = "text-decoration-none" })
+    </p>
+
+    <table class="table border">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>Mã NV</th>
+                <th>Họ và Tên</th>
+                <th>Giới Tính</th>
+                <th>Thành Phố</th>
+                <th>Ảnh</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                    <td>@Html.DisplayFor(modelItem => item.City)</td>
+                    <td>
+                        <img src="~/Images/@item.Image" alt="Ảnh nhân viên" width="80" height="100" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Sua", "Employee", new { id = item.Id }, new { @class = "text-decoration-none" }) |
+                        @Html.ActionLink("Details", "ChiTiet", "Employee", new { id = item.Id }, new { @class = "text-decoration-none" }) |
+                        @Html.ActionLink("Delete", "Xoa", "Employee", new { id = item.Id }, new { @class = "text-decoration-none" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>@Html.ActionLink("Bảng Employee - Deparmet", "DS_Employee_Deparment", "Employee", null, new { @class = "text-decoration-none" })</p>
+    <p>@Html.ActionLink("Go Back Department List", "SideBarDept", "Deparment", null, new { @class = "text-decoration-none" })</p>
+</body>
+</html>
+
+

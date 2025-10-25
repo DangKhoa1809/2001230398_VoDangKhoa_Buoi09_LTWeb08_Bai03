@@ -1,0 +1,56 @@
+﻿@model IEnumerable<LTWeb08_Bai03.Models.Employee>
+
+@{
+    ViewBag.Title = "Danh sách nhân viên - phòng ban";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h2 class="text-center fw-bold mt-3">BẢNG EMPLOYEE - DEPARTMENT</h2>
+
+    <table class="table table-bordered">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>Mã NV</th>
+                <th>Họ và Tên</th>
+                <th>Giới Tính</th>
+                <th>Thành Phố</th>
+                <th>Ảnh</th>
+                <th>Mã PB</th>
+                <th>Tên PB</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Gender</td>
+                    <td>@item.City</td>
+                    <td>
+                        <img src="~/Images/@item.Image" alt="Ảnh nhân viên" width="80" height="100" />
+                    </td>
+                    <td>@item.DeptId</td>
+                    <td>@item.Deparment.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="container mt-3">
+        <a href="@Url.Action("DS_Employee", "Employee")" class="text-decoration-none">Back to List</a>
+        <p>@Html.ActionLink("Go Back Department List", "SideBarDept", "Deparment", null, new { @class = "text-decoration-none" })</p>
+    </div>
+</body>
+</html>
+
+

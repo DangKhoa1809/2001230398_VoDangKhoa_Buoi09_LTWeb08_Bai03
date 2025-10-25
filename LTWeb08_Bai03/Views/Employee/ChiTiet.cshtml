@@ -1,0 +1,36 @@
+﻿@model LTWeb08_Bai03.Models.Employee
+
+@{
+    ViewBag.Title = "Thông tin chi tiết nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="card shadow-sm p-3 rounded-3">
+            <h2 class="fw-bold mb-3">THÔNG TIN CHI TIẾT NHÂN VIÊN</h2>
+            <div class="row">
+                <div class="col-md-2 text-start">
+                    <img src="~/Images/@Model.Image" alt="@Model.Name" class="img-fluid rounded mb-3" />
+                </div>
+                <div class="col-md-10">
+                    <p><strong>Họ Tên NV:</strong> @Model.Name</p>
+                    <p><strong>Giới tính:</strong> @Model.Gender</p>
+                    <p><strong>Thành phố:</strong> @Model.City</p>
+                    <p><strong>Mã Phòng ban:</strong> @Model.DeptId</p>
+                    <p><strong>Mã NV:</strong> @Model.Id</p>
+                    <a href="@Url.Action("EmployeesByDept", "Deparment", new { id = Model.DeptId })" class="text-decoration-none mt-3">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

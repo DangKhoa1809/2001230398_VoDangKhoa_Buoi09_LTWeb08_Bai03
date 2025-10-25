@@ -1,0 +1,44 @@
+﻿@model LTWeb08_Bai03.Models.Employee
+
+@{
+    ViewBag.Title = "Xóa nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="card shadow-sm p-3 rounded-3">
+            <h2 class="fw-bold mb-3 text-primary">XÓA NHÂN VIÊN</h2>
+            <div class="row">
+                <div class="col-md-2 text-start">
+                    <img src="~/Images/@Model.Image" alt="@Model.Name" class="img-fluid rounded mb-3 border" />
+                </div>
+                <div class="col-md-10">
+                    <p><strong>Mã NV:</strong> @Model.Id</p>
+                    <p><strong>Họ Tên NV:</strong> @Model.Name</p>
+                    <p><strong>Giới tính:</strong> @Model.Gender</p>
+                    <p><strong>Thành phố:</strong> @Model.City</p>
+                    <p><strong>Mã Phòng ban:</strong> @Model.DeptId</p>
+
+                    <div class="mt-3 d-flex gap-2">
+                        @using (Html.BeginForm("Xoa", "Employee", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa nhân viên này không?');">Xóa nhân viên</button>
+                        }
+                        <a href="@Url.Action("DS_Employee", "Employee")" class="btn btn-success">Quay lại</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

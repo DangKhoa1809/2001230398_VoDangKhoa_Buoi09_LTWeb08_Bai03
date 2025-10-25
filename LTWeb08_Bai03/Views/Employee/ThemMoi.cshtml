@@ -1,0 +1,66 @@
+﻿@model LTWeb08_Bai03.Models.Employee
+
+@{
+    ViewBag.Title = "Thêm mới nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <form action="@Url.Action("ThemMoi", "Employee")" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="card shadow-sm p-3 rounded-3">
+                <h2 class="fw-bold">THÊM MỚI NHÂN VIÊN</h2>
+
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control w-100" })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Gender</label>
+                    @Html.DropDownListFor(m => m.Gender, new SelectList(new[] { "Nam", "Nữ" }, Model.Gender), new { @class = "form-select w-100" })
+                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">City</label>
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control w-100" })
+                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">DeptId</label>
+                    @Html.DropDownListFor( m => m.DeptId, new SelectList(ViewBag.DeptId, "Value", "Text", Model.DeptId), "Select Deparment", new { @class = "form-select w-100", @required = "required" })
+                    @Html.ValidationMessageFor(m => m.DeptId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Image</label>
+                    <input type="file" name="ImageFile" class="form-control" accept="image/*" />
+                    @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success px-4">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container mt-3">
+        <a href="@Url.Action("DS_Employee", "Employee")" class="text-decoration-none">Back to List</a>
+    </div>
+</body>
+</html>
+
